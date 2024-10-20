@@ -34,7 +34,7 @@ function CartItems() {
         fetchCartItems();
     }, [userID]);
 
-    const handleProceedToPayment = async () => {`   ```
+    const handleProceedToPayment = async () => {
         if (selectedItems.length === 0) {
             alert('Please select items to proceed.');
             return;
