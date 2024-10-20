@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios'
+//import './Loader.css';
 
 const OTP = () => {
   const location = useLocation();
@@ -17,9 +18,18 @@ const OTP = () => {
   const [v6, setV6] = useState('');
   const [email, setEmail] = useState(''); 
   const [userType, setUserType]= useState('')
-  
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const [value, setValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
+  const ref5 = useRef();
+  const ref6 = useRef();
   
   const handleverify = async(e) =>{
     e.preventDefault();
@@ -34,12 +44,13 @@ const OTP = () => {
         }
       
     } catch (error) {
-      
+      console.error('Error:', error);
     }
   }
 
   const handleResend = async (e) =>{
     e.preventDefault();
+    //setIsLoading(true);
     
     try {
         const response = await axios.post("http://localhost:8080/backend/api/Home/forgotpassword.php",{email});
@@ -57,6 +68,16 @@ const OTP = () => {
         setErrorMessage('An error occurred. Please try again.');
     }
 }
+
+const handleChange = (e, setValue, nextRef) => {
+  const value = e.target.value;
+  if (value.length === 1) {
+    setValue(value); // Update the state with the entered value
+    if (nextRef && nextRef.current) {
+      nextRef.current.focus(); // Move to the next input only if nextRef exists
+    }
+  }
+};
 
   return (
     <div className="d-flex vh-100 align-items-center justify-content-center">
@@ -79,13 +100,23 @@ const OTP = () => {
         </p>
   
         <div className="d-flex justify-content-between mb-4">
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v1} onChange={(e) => setV1(e.target.value)} />
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v2} onChange={(e) => setV2(e.target.value)} />
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v3} onChange={(e) => setV3(e.target.value)} />
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v4} onChange={(e) => setV4(e.target.value)} />
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v5} onChange={(e) => setV5(e.target.value)} />
-          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v6} onChange={(e) => setV6(e.target.value)} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v1} onChange={(e) => handleChange(e, setV1, ref2)}
+              ref={ref1} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v2} onChange={(e) => handleChange(e, setV2, ref3)}
+              ref={ref2} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v3} onChange={(e) => handleChange(e, setV3, ref4)}
+              ref={ref3} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v4} onChange={(e) => handleChange(e, setV4, ref5)}
+              ref={ref4} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v5} onChange={(e) => handleChange(e, setV5, ref6)}
+              ref={ref5} />
+          <input type="text" maxLength="1" className="form-control text-center mx-1" style={{ width: '50px', fontSize: '24px' }} value={v6} onChange={(e) => handleChange(e, setV6, null)}
+              ref={ref6} />
         </div>
+
+        {/* {isLoading && (
+          <div className="loader"></div>
+        )} */}
   
         <p className="text-center mb-4" style={{ fontSize: '80%' }}>
           Didn't get the code?

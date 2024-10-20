@@ -70,14 +70,14 @@ const ChangePassword = () => {
             <form className="form-box p-2" onSubmit={handleChangePassword}>
                 <h2 className='text-center mt-4'>Change Password</h2>
                 {errorMessage && (
-                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                <div className="alert alert-danger alert-dismissible fade show" role="alert" style={{fontSize:'120%'}}>
                     {errorMessage}
                 </div>
             )}
 
             {/* Success message */}
             {successMessage && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                <div className="alert alert-success alert-dismissible fade show" role="alert" style={{fontSize:'120%'}}>
                     {successMessage}
                 </div>
             )}

@@ -12,7 +12,7 @@ function Customerdetails() {
   const [showViewModal, setShowViewModal] = useState(false);
   const [showRequestAddModal, setShowRequestAddModal] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-
+  const[isLoading, setIsLoading] = useState(false);
   const handleShowViewModal = (customer) => {
     setSelectedCustomer(customer);
     setShowViewModal(true);
@@ -182,10 +182,10 @@ function Customerdetails() {
             <p>
               <strong>District:</strong> {selectedCustomer.customerDistrict}
             </p>
-            <p>
+            {/* <p>
               <strong>Reference No:</strong>{" "}
               {selectedCustomer.customerShopReferenceNo}
-            </p>
+            </p> */}
             <p>
               <strong>Password:</strong> {selectedCustomer.password}
             </p>

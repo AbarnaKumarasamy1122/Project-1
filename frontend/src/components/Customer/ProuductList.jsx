@@ -24,7 +24,7 @@ function ProductList({ sidebarToggle }) {
 
     const checkCartItems = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/backend/api/Customer/check_cart_items.php', {
+        const response = await axios.get('http://localhost:8080/backend/api/Customer/check_cart_item.php', {
           params: { customer_id: userID },
         });
         const cartItems = response.data.reduce((acc, item) => {

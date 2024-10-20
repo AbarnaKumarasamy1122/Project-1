@@ -14,6 +14,8 @@ export const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         const sessionUser = JSON.parse(sessionStorage.getItem('user'));
@@ -74,13 +76,14 @@ export const Login = () => {
 
     const handleforgotpassword = async (e) =>{
         e.preventDefault();
+        setIsLoading(true);
         
         try {
             const response = await axios.post("http://localhost:8080/backend/api/Home/forgotpassword.php",{email});
             const data = response.data;
             
             console.log(data);
-           const code = data.message;
+            const code = data.message;
            
             if(data.success){
                 
@@ -95,6 +98,9 @@ export const Login = () => {
             console.error('Error:', error);
             setErrorMessage('An error occurred. Please try again.');
         }
+        finally {
+        setIsLoading(false);  // Hide loader
+    }
     }
 
     return (
@@ -109,7 +115,18 @@ export const Login = () => {
                     <Link to="/Login" style={{fontSize:'150%'}}>Log in</Link>
                 </div>
             </div>
-            
+            {isLoading && (
+            <div className="d-flex justify-content-center align-items-center vh-100">
+                <div className="homeHeaderLogo">
+                            <div id="logoContainer">
+                                <div id="ring"></div>
+                                <div id="ring"></div>
+                                <div id="ring"></div>
+                                <div id="ring"></div>
+                            </div>
+                        </div> {/* Use the loader CSS here */}
+            </div>
+        )}
             <div className="loginBody">
             <div className="homeBanner  background-opacity">
                     <div className="homePageContainer">

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
+import './Loader.css';
+
 
 
 const Requestcompany = ({ showRequestAddModal, handleCloseRequestAddModal, handleShowViewModal }) => {
@@ -10,6 +12,7 @@ const Requestcompany = ({ showRequestAddModal, handleCloseRequestAddModal, handl
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showCompanyDetailsModal, setShowCompanyDetailsModal] = useState(false);
+    const[isLoading, setIsLoading] = useState(false);
 
     const fetchCompanyRequestData = async () => {
         setLoading(true);
@@ -63,6 +66,7 @@ const Requestcompany = ({ showRequestAddModal, handleCloseRequestAddModal, handl
         console.log('accept clicked');
         const confirmed = window.confirm("Are you sure want to add this company ?");
         if(confirmed){
+          setIsLoading(true);
           try {
             const response = await axios.post('http://localhost:8080/backend/api/Admin/Addcompany.php', selectedCompany);
             const data = response.data;
@@ -79,6 +83,8 @@ const Requestcompany = ({ showRequestAddModal, handleCloseRequestAddModal, handl
           } catch (error) {
             console.error('Error:', error);
             alert("There was an error!");
+          }finally{
+            setIsLoading(false);
           }
           setShowCompanyDetailsModal(false);
         }
@@ -171,6 +177,11 @@ const Requestcompany = ({ showRequestAddModal, handleCloseRequestAddModal, handl
             <Button variant="success" onClick={handleAcceptCompany}>Accept</Button>
             <Button variant="danger" onClick={handleRejectCompany}>Reject</Button>
           </Modal.Footer>
+          {isLoading &&(
+              <div className='d-flex justify-content-center my-3'>
+                <div className='Loader'></div>
+              </div>
+            )}
         </Modal>
       )}
         </>

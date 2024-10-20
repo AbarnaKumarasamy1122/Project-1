@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Addcustomer from './Addcustomer';
+import './Loader.css';
+
 
 const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, handleShowViewModal }) => {
   const [customers, setCustomers] = useState([]);
@@ -10,6 +12,7 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showCustomerDetailsModal, setShowCustomerDetailsModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -66,15 +69,15 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
     setShowCustomerDetailsModal(false);
   };
 
-  // const handleConfirm = () =>{
-  //   alert("Do you want add customer");
-  // }
+  
 
   const handleAcceptCustomer = async () => {
     // Implement accept customer logic here
     console.log('accept clicked');
     const confirmed = window.confirm("Are you sure you want to add this customer");
     if(confirmed){
+      setIsLoading(true);
+
       try {
         const response = await axios.post('http://localhost:8080/backend/api/Admin/Addcustomer.php', selectedCustomer);
         const data = response.data;
@@ -91,6 +94,8 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
       } catch (error) {
         console.error('Error:', error);
         alert("There was an error!");
+      }finally{
+        setIsLoading(false);
       }
       setShowCustomerDetailsModal(false);
     }
@@ -102,10 +107,13 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
     console.log('accept rejected');
     const confirmed = window.confirm("Are you sure you want to reject this customer");
     if(confirmed){
+      setIsLoading(true);
+
       try {
         const response = await axios.post('http://localhost:8080/backend/api/Admin/deletecustomer.php', selectedCustomer);
         const data = response.data;
         console.log('data : ', data);
+        setIsLoading(true);
         if (data.success) {
           alert("Customer rejected successfully");
           // Optionally refetch the customer list or update state to remove the accepted customer from the UI
@@ -118,6 +126,8 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
       } catch (error) {
         console.error('Error:', error);
         alert("There was an error!");
+      }finally{
+        setIsLoading(false);
       }
       setShowCustomerDetailsModal(false);
     }
@@ -127,6 +137,7 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
 
   return (
     <>
+    
       <Modal show={showRequestAddModal} onHide={handleCloseRequestAddModal}>
         <Modal.Header closeButton>
           <Modal.Title>Customer Requests</Modal.Title>
@@ -166,13 +177,18 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
             <Modal.Title>View Customer</Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ fontSize: '135%' }}>
-            <p><strong>ID:</strong> {selectedCustomer.id}</p>
-            <p><strong>Name:</strong> {selectedCustomer.username}</p>
-            <p><strong>Shop Name:</strong> {selectedCustomer.businessName}</p>
-            <p><strong>Email:</strong> {selectedCustomer.email}</p>
-            <p><strong>Contact Number:</strong> {selectedCustomer.contactNumber}</p>
-            <p><strong>Address:</strong> {selectedCustomer.address}</p>
-            <p><strong>District:</strong> {selectedCustomer.district}</p>
+            {/* {isLoading ? ( <div className='loader'/>) : ( */}
+              
+              <p><strong>ID:</strong> {selectedCustomer.id}</p>
+              <p><strong>Name:</strong> {selectedCustomer.username}</p>
+              <p><strong>Shop Name:</strong> {selectedCustomer.businessName}</p>
+              <p><strong>Email:</strong> {selectedCustomer.email}</p>
+              <p><strong>Contact Number:</strong> {selectedCustomer.contactNumber}</p>
+              <p><strong>Address:</strong> {selectedCustomer.address}</p>
+              <p><strong>District:</strong> {selectedCustomer.district}</p>
+              
+            {/* //)} */}
+            
             {/*<p><strong>Reference No:</strong> {selectedCustomer.customerShopReferenceNo}</p>*/}
             {/*<p><strong>Password:</strong> {selectedCustomer.password}</p>*/}
           </Modal.Body>
@@ -180,6 +196,11 @@ const Requestcustomer = ({ showRequestAddModal, handleCloseRequestAddModal, hand
             <Button variant="success" onClick={handleAcceptCustomer}>Accept</Button>
             <Button variant="danger" onClick={handleRejectCustomer}>Reject</Button>
           </Modal.Footer>
+          {isLoading &&(
+              <div className='d-flex justify-content-center my-3'>
+                <div className='Loader'></div>
+              </div>
+            )}
         </Modal>
       )}
     </>

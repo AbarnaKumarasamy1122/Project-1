@@ -25,7 +25,7 @@
 
   :root {
     --color1: #0f124b;
-    --color2: #7892ba;
+    --color2: #4a709d;
     --color3: #9b95e4;
     --color4: #2cecf0;
     --color5: #d6d5e4;
@@ -50,7 +50,8 @@
     margin-top:20px ;
     padding-bottom: 5rem;
     height: 100%;
-    background-color: var(--lightgray);
+    /* background-color: var(--lightgray); */
+    background-color: #f4f6f9;
   }  
   
   .add-container {
@@ -171,6 +172,8 @@
   }
 
   .table_heading {
+    box-shadow: 0px 0px 2px 8px rgba(154, 153, 153, 0.4); 
+    border-collapse: collapse;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -212,10 +215,16 @@
   
   .search_input {
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 7px;
     border: 1px solid #ccc;
     margin-right: 10px;
     font-size: 0.8rem;
+    transition: all 0.3s ease;
+  }
+
+  .search_input:focus {
+    outline: none;
+    border-color: #ff9800;
   }
   
   .search_icon {
@@ -224,6 +233,9 @@
   }
   
 /* table some css add */
+  .display_details table{
+     background-color: white;
+  }
   .display_details table thead th {
     padding: 1.5rem;
     font-size: 1.3rem;
@@ -234,6 +246,17 @@
   .display_details table tr{
     border: 2px solid rgb(113, 112, 112);
   }
+
+  .display_details tfoot {
+    background-color: #9b9a9a;
+    font-size: 1.1rem;
+  }
+
+  .display_details{
+    box-shadow: 0px 5px 4px 8px rgba(154, 153, 153, 0.4); 
+    border-collapse: collapse; 
+  }
+  
 
   td {
     padding: 1rem;
@@ -481,7 +504,7 @@
   /* table row wise hover */
   
   table tbody tr:hover {
-    background-color: #ece9f4; 
+    background-color: #e5e3e3; 
     transition: background-color 0.3s; 
 }
 

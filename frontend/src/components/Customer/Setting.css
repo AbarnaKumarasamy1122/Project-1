@@ -1,0 +1,93 @@
+.setting-container {
+    max-width: 500px;
+    margin: 3rem auto;
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .setting-title {
+    font-size: 1.8rem;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .setting-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .setting-form-label {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  
+  .setting-form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s;
+  }
+  
+  .setting-form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 8px rgba(128, 189, 255, 0.5);
+  }
+  
+  .setting-button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .setting-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .setting-btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .setting-btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .setting-btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+  
+  .setting-btn-secondary:hover {
+    background-color: #5a6268;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .setting-alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .setting-alert-danger {
+    background-color: #dc3545;
+  }
+  
+  .setting-alert-success {
+    background-color: #28a745;
+  }
+  
