@@ -21,7 +21,7 @@ function PaymentPage() {
     const formatCardNumber = (number) => {
         return number.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim();
     };
-
+    console.log("payment:",invoice);
     // Handle form input changes for card details
     const handleCardInputChange = (e) => {
         const { name, value } = e.target;
@@ -63,13 +63,13 @@ function PaymentPage() {
         try {
             // Adding `await` to wait for the response
             const response = await axios.post('http://localhost:8080/backend/api/Customer/payment.php', {
-                orderID: invoice.orderID,
+                invoiceID: invoice.invoiceID,
                 paymentMethod: paymentMethod,
                 total: totalAmount
             });
             
             const data = response.data;
-            console.log("data", data);  
+            console.log("data payment", data);  
     
             if (data.success) {
                 console.log(data);
@@ -100,7 +100,7 @@ function PaymentPage() {
 
             <div className="payment-card">
                 <div className="payment-card-body">
-                    <h5 className="payment-info"><strong>Invoice ID:</strong> {invoice.orderID}</h5>
+                    <h5 className="payment-info"><strong>Invoice ID:</strong> {invoice.invoiceID}</h5>
                     <h5 className="payment-info"><strong>Total Amount:</strong> Rs. {totalAmount}</h5>
 
                     {/* Payment Method Selection */}
@@ -132,7 +132,7 @@ function PaymentPage() {
                             <div className="payment-credit-card-form">
                                 <h5 className="credit-card-form-title">Enter Credit Card Details:</h5>
 
-                                <div className="form-group">
+                                <div className="payment-form-group">
                                     <label htmlFor="cardNumber">Card Number</label>
                                     <input
                                         type="text"
@@ -146,7 +146,7 @@ function PaymentPage() {
                                     />
                                 </div>
 
-                                <div className="form-group">
+                                <div className="payment-form-group">
                                     <label htmlFor="expiryDate">Expiry Date</label>
                                     <DatePicker
                                         id="expiryDate"
@@ -159,7 +159,7 @@ function PaymentPage() {
                                     />
                                 </div>
 
-                                <div className="form-group">
+                                <div className="payment-form-group">
                                     <label htmlFor="cvv">CVV</label>
                                     <input
                                         type="text"

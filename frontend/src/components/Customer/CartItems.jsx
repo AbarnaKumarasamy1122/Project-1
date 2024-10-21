@@ -41,23 +41,25 @@ function CartItems() {
         }
 
         const total = selectedItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-
+        console.log("selected: ",selectedItems);
         try {
             const response = await axios.post('http://localhost:8080/backend/api/Customer/generate_invoice.php', {
                 customer_id: userID,
                 items: selectedItems
             });
-
+            console.log("invooice:",response.data);
             if (response.data) {
+                
                 setInvoice(response.data);
                 axios.get(`http://localhost:8080/backend/api/Customer/get_order_details.php`, {
                     params: {
-                        order_id: response.data.orderID
+                        invoiceID: response.data.invoiceID
                     },
                     withCredentials: true
                 })
                     .then((response) => {
                         setTotalAmount(total.toFixed(2)); // Set total amount in state
+                        console.log
                         navigate('/customer/payment', { state: { invoice: response.data, totalAmount: total.toFixed(2), customer_id: userID } });
                     })
                     .catch((error) => console.error('Error fetching order items:', error));

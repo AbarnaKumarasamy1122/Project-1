@@ -119,32 +119,32 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
 }
 
-.form-group {
-    margin: 15px 0; /* Increased margin for better spacing */
+.cu-form-group {
+    margin: 15px 0; 
     width: 100%;
 }
 
-.form-group label {
+.cu-form-group label {
     display: block;
-    margin-bottom: 8px; /* Increased margin for labels */
-    font-size: 1.1rem; /* Increased font size for labels */
+    margin-bottom: 8px;
+    font-size: 1.1rem; 
 }
 
-.form-group input,
-.form-group select {
+.cu-form-group input,
+.cu-form-group select {
     width: 100%;
-    padding: 12px; /* Increased padding for input fields */
+    padding: 12px; 
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 1rem; /* Increased font size for inputs */
-    transition: border-color 0.3s; /* Animation for border on focus */
+    font-size: 1rem; 
+    transition: border-color 0.3s; 
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.cu-form-group input:focus,
+.cu-form-group select:focus {
     border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft blue shadow on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
 .save-button {

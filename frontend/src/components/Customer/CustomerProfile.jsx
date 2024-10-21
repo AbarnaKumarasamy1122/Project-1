@@ -128,23 +128,23 @@ function CustomerProfile() {
             />
             <button type="button" className="choose-file-button" onClick={handleClick}>Choose File</button>
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>Customer Name</label>
             <input type="text" disabled value={user.customerName} />
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>Shop Name</label>
             <input type="text" disabled value={user.customerShopName} />
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>Email Address</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>Mobile Number</label>
             <input type="number" value={number} onChange={(e) => setNumber(e.target.value)} />
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>District</label>
             <select value={user.customerDistrict} disabled>
               <option value="1">Jaffna</option>
@@ -154,7 +154,7 @@ function CustomerProfile() {
               <option value="5">Vavuniya</option>
             </select>
           </div>
-          <div className="form-group">
+          <div className="cu-form-group">
             <label>Address</label>
             <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
           </div>

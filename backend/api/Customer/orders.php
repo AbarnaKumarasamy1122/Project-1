@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     $customer_id = $_GET['customer_id'];
     $status =$_GET['status'];
 
-    $sql = "SELECT * FROM orders WHERE customerID = ? AND status = ?";
+    $sql = "SELECT * FROM invoices WHERE customerID = ? AND status = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1,$customer_id);
     $stmt->bindParam(2,$status);;

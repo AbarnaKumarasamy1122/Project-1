@@ -7,6 +7,7 @@ function Orders() {
     const [pendingOrders, setPendingOrders] = useState([]);
     const [succeededOrders, setSucceededOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState([]); // For displaying order items
+    const [selectedOrders, setSelectedOrders] = useState([]); // For displaying order items
     const [showModal, setShowModal] = useState(false); // Modal state
     const [selectedOrderID, setSelectedOrderID] = useState('');
     const [invoice, setInvoice] = useState(null);
@@ -58,11 +59,12 @@ function Orders() {
     }, [userID]);
 
     // Handle order click to display items
-    const handleOrderClick = (orderID, status, total) => {
-        setSelectedOrderID(orderID);
+    const handleOrderClick = (invoiceID, status) => {
+        console.log("invoiceID : : ",invoiceID);
+        setSelectedOrderID(invoiceID);
         axios.get(`http://localhost:8080/backend/api/Customer/get_order_details.php`, {
             params: {
-                order_id: orderID
+                invoiceID: invoiceID
             },
             withCredentials: true
         }) // Fetch items for a specific order
@@ -70,15 +72,17 @@ function Orders() {
                 console.log("Fetched order details: ", response.data); // Log the fetched data
                 if (response.data) {
                     
-                        setSelectedOrder(response.data.items); // Set selected order details
-                    
-                    // Show modal with order items
+                    // setSelectedOrder(response.data.items); // Set selected order details
+                    setSelectedOrders(response.data.orders); // Set selected order details
+                }
+                if(selectedOrders && total){
                     if (status == 'pay') {
                         console.log("total: ", total);
+                        console.log("total pay: ", selectedOrder);
                         navigate('/customer/payment', { state: { invoice: response.data, totalAmount: total, customer_id: userID } })
                     }
                 }
-                if (selectedOrder && (status == 'view')) {
+                if (selectedOrders && (status == 'view')) {
                     setShowModal(true);
                 }
                 // if (invoice && (status == 'pay')) {
@@ -93,7 +97,7 @@ function Orders() {
 
     // Close the modal
     const handleCloseModal = () => {
-        console.log("close: ", selectedOrder);
+        console.log("close: ", selectedOrders);
         setShowModal(false);
         setSelectedOrder(null);
         setSelectedOrder(null); // Reset selected order
@@ -120,16 +124,19 @@ function Orders() {
                             </thead>
                             <tbody>
                                 {pendingOrders.map((order) => (
-                                    <tr key={order.orderID}>
-                                        <td>{order.orderID}</td>
-                                        <td>Rs. {order.total}</td>
-                                        <td>{order.orderDate}</td>
+                                    <tr key={order.invoiceID}>
+                                        <td>{order.invoiceID}</td>
+                                        <td>Rs. {order.totalAmount}</td>
+                                        <td>{order.invoiceDate}</td>
                                         <td>
-                                            <Button variant="primary" onClick={() => handleOrderClick(order.orderID, 'pay', order.total)}>
+                                            <Button variant="primary" onClick={() => {
+                                                setTotal(order.totalAmount);
+                                                handleOrderClick(order.invoiceID, 'pay');
+                                            }}>
                                                 {/* <Button variant="primary" onClick={() => navigate('/customer/payment', { state: { invoice: order , totalAmount: order.total} })}> */}
                                                 Pay Now
                                             </Button>
-                                            <Button variant="info" className="ml-2" onClick={() => handleOrderClick(order.orderID, 'view', order.total)}>
+                                            <Button variant="info" className="ml-2" onClick={() => handleOrderClick(order.invoiceID, 'view')}>
                                                 View Items
                                             </Button>
                                         </td>
@@ -160,12 +167,12 @@ function Orders() {
                             </thead>
                             <tbody>
                                 {succeededOrders.map((order) => (
-                                    <tr key={order.orderID}>
-                                        <td>{order.orderID}</td>
-                                        <td>Rs. {order.total}</td>
-                                        <td>{order.orderDate}</td>
+                                    <tr key={order.invoiceID}>
+                                        <td>{order.invoiceID}</td>
+                                        <td>Rs. {order.totalAmount}</td>
+                                        <td>{order.invoiceDate}</td>
                                         <td>
-                                            <Button variant="info" className="ml-2" onClick={() => handleOrderClick(order.orderID, 'view', order.total)}>
+                                            <Button variant="info" className="ml-2" onClick={() => handleOrderClick(order.invoiceID, 'view')}>
                                                 View Items
                                             </Button>
                                         </td>
@@ -186,30 +193,35 @@ function Orders() {
             {/* Order Items Modal */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Order Items of Order ID : {selectedOrderID} </Modal.Title>
+                    <Modal.Title>Order Items for Invoice: {selectedOrderID}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {selectedOrder ? (
-                        <table className="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {selectedOrder.map((item) => (
-                                    <tr key={item.orderItemID}>
-                                        <td>{item.productName}</td>
-                                        <td>Rs. {item.price}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>Rs. {item.price * item.quantity}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    {selectedOrders.length > 0 ? (
+                        selectedOrders.map((order) => (
+                            <div key={order.orderID}>
+                                <h5>Order ID: {order.orderID}</h5>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {order.items.map((item) => (
+                                            <tr key={item.orderItemID}>
+                                                <td>{item.productName}</td>
+                                                <td>Rs. {item.price}</td>
+                                                <td>{item.quantity}</td>
+                                                <td>Rs. {item.price * item.quantity}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ))
                     ) : (
                         <p>No items found for this order.</p>
                     )}
