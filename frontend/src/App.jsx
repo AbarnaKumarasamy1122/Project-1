@@ -56,6 +56,9 @@ import ReviewMainLayout from './components/Customer/Review/ReviewMainLayout';
 import ChangePassword from './components/Home/ChangePassword';
 import Orders from './components/Customer/Orders';
 import Resetpassword from './components/Home/Resetpassword';
+import Otp from './components/Company/Otp';
+import AnalyzeReports from './components/Company/AnalyzeReports';
+
 
 function App() {
   const [toggle, setToggle] = useState(false);
@@ -86,6 +89,7 @@ function App() {
             <Route path="Customerdetails" element={<Customerdetails />} />
             <Route path="Companydetails" element={<Companydetails />} />
             <Route path='Order' element={<AdminOrder />} />
+
           </Route>
           {/* customer */}
           <Route path="/customer" element={<CustomerLayout setToggle={setToggle} />}>
@@ -117,6 +121,8 @@ function App() {
             <Route exact path="profile" element={<CompanyProfile />} />
             <Route exact path="messagelist" element={<MessageList />} />  
             <Route exact path="messageDetail/:contactID" element={<MessageDetail />} />
+            <Route exact path="otp" element={<Otp/>}/>
+            <Route exact path="analyze" element={<AnalyzeReports/>}/>
           </Route>
         </Routes>
         <Footer toggle={toggle} />

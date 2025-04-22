@@ -19,7 +19,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM products");
+    $stmt = $conn->prepare("SELECT * FROM products where status='available'");
     $stmt->execute();
 
     // Fetch all products as an associative array

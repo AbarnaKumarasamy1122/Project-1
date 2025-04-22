@@ -172,8 +172,8 @@ function CartItems() {
                                         className='item-checkbox'
                                     />
                                 </td>
-                                <td><img src={Item.product_image} className='product-image' /></td>
-                                <td className='product-name'>{Item.product_name}</td>
+                                <td style={{width:'30%'}}><img src={Item.product_image} className='product-image' style={{width:'60%'}}/></td>
+                                <td className='product-name' style={{fontSize:'130%'}}>{Item.product_name}</td>
                                 <td>{Item.price}</td>
                                 <td>
                                     <label className="quantity-label"></label>
@@ -207,10 +207,10 @@ function CartItems() {
                     <Modal.Title>Confirm Your Order</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Are you sure you want to confirm this order?</p>
+                    <p style={{fontSize:'130%'}}> Are you sure you want to confirm this order?</p>
                     <table className="invoice-table" bordered>
                         <thead>
-                            <tr>
+                            <tr style={{fontSize:'130%'}}>
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
@@ -219,14 +219,14 @@ function CartItems() {
                         </thead>
                         <tbody>
                             {selectedItems.map((item, index) => (
-                                <tr key={index}>
+                                <tr key={index} className='c-table-tdata'>
                                     <td>{item.product_name}</td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity}</td>
                                     <td>{item.price * item.quantity}.00</td>
                                 </tr>
                             ))}
-                            <tr>
+                            <tr id='tm'>
                                 <td colSpan={3} className="total-amount-cell"><strong>Total Amount:</strong></td>
                                 <td className='total-amount'>{totalAmount}</td>
                             </tr>

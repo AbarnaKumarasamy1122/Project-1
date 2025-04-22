@@ -200,6 +200,7 @@ function Orders() {
                         selectedOrders.map((order) => (
                             <div key={order.orderID}>
                                 <h5>Order ID: {order.orderID}</h5>
+                                <h6> Order Total amount : <b>Rs.{order.total_per_order}.00</b></h6>
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
@@ -217,8 +218,11 @@ function Orders() {
                                                 <td>{item.quantity}</td>
                                                 <td>Rs. {item.price * item.quantity}</td>
                                             </tr>
+                                            
                                         ))}
+                                        
                                     </tbody>
+                                    
                                 </table>
                             </div>
                         ))

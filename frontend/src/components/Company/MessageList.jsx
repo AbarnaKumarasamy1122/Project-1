@@ -81,7 +81,7 @@ const MessageList = () => {
        <div className="search_container">
           <input
             type="text"
-            placeholder="Search by product name"
+            placeholder="Search by Customer name"
             value={searchTerm}
             onChange={handleSearch}
             className="search_input"

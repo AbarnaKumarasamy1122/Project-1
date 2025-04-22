@@ -1,0 +1,59 @@
+.analyze-reports {
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    color: #333; /* Darker color for headings */
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .report-summary {
+    background-color: #ffffff; /* White background for report summary */
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6; /* Light border for definition */
+    margin-bottom: 20px;
+  }
+  
+  .report-summary p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .order-status {
+    margin-top: 10px;
+  }
+  
+  .order-status h4 {
+    font-size: 20px;
+    color: #007bff; /* Bootstrap primary color */
+    margin-bottom: 10px;
+  }
+  
+  .order-status ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+  }
+  
+  .order-status li {
+    background-color: #e9ecef; /* Light background for each status */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s; /* Smooth hover effect */
+  }
+  
+  .order-status li:hover {
+    background-color: #d1e7dd; /* Light green on hover */
+  }
+  
+  .error {
+    color: red; /* Error message styling */
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  

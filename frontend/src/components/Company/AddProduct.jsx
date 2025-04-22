@@ -161,7 +161,7 @@ function AddProduct() {
             setNetWeight('');
             fileInputRef.current.value = '';
             if(response){
-                alert("product added Successfully..!");
+               // alert("product added Successfully..!");
             }
             setTimeout(() => {
                 setIsMessageVisible(false);

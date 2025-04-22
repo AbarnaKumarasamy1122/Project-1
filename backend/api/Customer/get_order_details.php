@@ -51,14 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $stmt->execute();
                     $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     if ($datas) {
+                       $total = 0;
+                        foreach($datas as $data){
+                            $response[] = $data;
+                            $total+= $data['quantity']*$data['price'];
+                        }
                         $orders_detail = [
                             'orderID' => $order_id,
+                            'total_per_order' =>$total,
                             'items' => $datas
                         ];
                         $orders_details[]=$orders_detail;
-                        foreach($datas as $data){
-                            $response[] = $data;
-                        }
                          // Collect responses
                     }
 

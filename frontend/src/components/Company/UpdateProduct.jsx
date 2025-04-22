@@ -95,23 +95,37 @@ const UpdateProduct = () => {
             encType="multipart/form-data"
             className="update_product product_container_box"
           >
-            <div className="justify-content-center d-flex w-100 align-items-center image-container">
+            <div className="d-flex justify-content-center align-items-center w-100">
               {image ? (
                 <img
                   src={URL.createObjectURL(image)}
                   alt="upload image"
-                  className="rounded-circle product-image"
+                  className="rounded-circle img-fluid"
+                  style={{
+                    Width: "250px",
+                    height: "auto",
+                    objectFit: "cover",
+                  }} // Ensures responsive image sizing
                 />
               ) : product.productImage ? (
                 <img
                   src={product.productImage}
-                  alt=" image"
-                  className="rounded-circle product-image"
+                  alt="product image"
+                  className="rounded-circle img-fluid"
+                  style={{
+                    maxWidth: "200px",
+                    height: "auto",
+                    objectFit: "cover",
+                  }} // Ensures responsive image sizing
                 />
               ) : (
-                <BiImageAdd className="w-50 h-100 ps-2 rounded bg-white" />
+                <BiImageAdd
+                  className="w-50 h-auto ps-2 rounded bg-white"
+                  style={{ fontSize: "130px", color: "#ccc" }} // Centered and styled placeholder
+                />
               )}
             </div>
+
             <input type="hidden" name="update_product_id" value={productID} />
             <input
               type="hidden"

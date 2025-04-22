@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import { FaWindowClose, FaUser,FaUserCircle } from 'react-icons/fa';
-import { IoBagAdd } from "react-icons/io5";
+import { IoAnalyticsOutline, IoBagAdd } from "react-icons/io5";
 import { RiLogoutCircleLine, RiMessage2Fill } from "react-icons/ri";
 import { AiFillDashboard, AiFillProduct } from "react-icons/ai";
 import { MdViewComfyAlt } from "react-icons/md";
@@ -113,6 +113,11 @@ const CompanySidebar = ({ sidebarToggle, setSidebarToggle,error, user,setToggle}
                     <li className='mb-2 hover-bg-blue-500 py-1 rounded align-items-center' >
                         <a href="/company/profile" className='text-decoration-none text-white fs-5 px-2' >
                             <FaUserCircle className='w-6 h-6 mx-3 pb-1' />Profile
+                        </a>
+                    </li>
+                    <li className='mb-2 hover-bg-blue-500 py-1 rounded align-items-center' >
+                        <a href="/company/analyze" className='text-decoration-none text-white fs-5 px-2' >
+                            <IoAnalyticsOutline className='w-6 h-6 mx-3 pb-1' />Analyze Reports
                         </a>
                     </li>
                 </ul>

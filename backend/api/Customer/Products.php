@@ -7,7 +7,7 @@ header('Access-Control-Allow-Methods: POST, GET ,OPTIONS');
 include('../Connection/connection.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $query ="SELECT * FROM products ";
+    $query ="SELECT * FROM products where status='available' ";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);

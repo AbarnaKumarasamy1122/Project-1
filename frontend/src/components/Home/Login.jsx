@@ -115,18 +115,21 @@ export const Login = () => {
                     <Link to="/Login" style={{fontSize:'150%'}}>Log in</Link>
                 </div>
             </div>
-            {isLoading && (
+            {isLoading ? (
             <div className="d-flex justify-content-center align-items-center vh-100">
+                
                 <div className="homeHeaderLogo">
+                <div className='fs-3'>Loading....</div>
                             <div id="logoContainer">
                                 <div id="ring"></div>
                                 <div id="ring"></div>
                                 <div id="ring"></div>
                                 <div id="ring"></div>
                             </div>
+                            
                         </div> {/* Use the loader CSS here */}
             </div>
-        )}
+        ):(
             <div className="loginBody">
             <div className="homeBanner  background-opacity">
                     <div className="homePageContainer">
@@ -196,6 +199,7 @@ export const Login = () => {
 
 
             </div>
+        )}
         </div>
         // </div>
     );

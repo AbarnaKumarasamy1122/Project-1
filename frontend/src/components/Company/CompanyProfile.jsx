@@ -101,63 +101,114 @@ function CompanyProfile() {
       <div className={``}>
         {!edit && (
           <div
-            id="myDiv"
-            className=" d-flex py-4 w-100 flex-column justify-content-center"
+            style={{
+              backgroundColor: "#f0f4f8", // Light background color
+              padding: "20px",
+              borderRadius: "10px",
+              boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.2)",
+            }}
           >
-            <div className=" d-flex py-4 w-100 xs-flex-column justify-content-center m-auto">
-              <div className="justify-content-center d-flex w-30  align-items-start ms-5">
-                {image ? (
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt="upload image"
-                    className="w-75 rounded-circle align-items-center justify-content-center"
-                  />
-                ) : imagepath ? (
-                  <img
-                    src={imagepath}
-                    alt=" image"
-                    className="w-100 rounded-circle align-items-start d-flex "
-                  />
-                ) : (
-                  <FaCircleUser className="w-64 h-64 rounded-circle bg-white " />
-                )}
-              </div>
-              <div className="md-w-75 sm-w-100 xs-w-100 d-flex m-auto flex-column justify-content-center fs-5 p-4">
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Name </div>:
-                  <div className="w-50 ps-2">{user.companyOwnerName} </div>
+            <div
+              id="myDiv"
+              className=" d-flex py-4 w-100 flex-column justify-content-center"
+            >
+              <div className="d-flex py-4 w-100 xs-flex-column justify-content-center m-auto">
+                <div className="justify-content-center d-flex w-30 align-items-start ms-5">
+                  {image ? (
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt="upload image"
+                      className="w-75 rounded-circle align-items-center justify-content-center"
+                      style={{ border: "5px solid blue" }} // Blue border for the uploaded image
+                    />
+                  ) : imagepath ? (
+                    <img
+                      src={imagepath}
+                      alt="image"
+                      className="w-75 rounded-circle align-items-start d-flex"
+                      style={{ border: "5px solid blue" }} // Blue border for the image from path
+                    />
+                  ) : (
+                    <FaCircleUser
+                      className="w-64 h-64 rounded-circle bg-white"
+                      style={{ border: "5px solid blue" }} // Blue border for the default icon
+                    />
+                  )}
                 </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Shop Name</div>:
-                  <div className="w-50 ps-2">{user.companyName}</div>
-                </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Email Address</div>:
-                  <div className="w-50 ps-2">{user.email}</div>
-                </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Mobile Number</div>:
-                  <div className="w-50 ps-2">{user.companyContactNumber}</div>
-                </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">District</div>:
-                  <div className="w-50 ps-2">{user.district}</div>
-                </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Address</div>:
-                  <div className="w-50 ps-2">{user.companyAddress}</div>
-                </div>
-                <div className="w-100 d-flex mb-1 justify-content-center">
-                  <div className="md-w-25 sm-w-50 xs-w-50">Business Info</div>:
-                  <div className="w-50 ps-2">{user.businessInfo}</div>
-                </div>
-                <div className="d-flex mt-5 justify-content-center">
-                  <button
-                    className="btn btn-secondary w-25"
-                    onClick={() => setEdit(true)}
-                  >
-                    Edit
-                  </button>
+
+                <div className="md-w-75 sm-w-100 xs-w-100 d-flex m-auto flex-column justify-content-center fs-5 p-4">
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Name{" "}
+                    </div>
+                    :<div className="w-50 ps-2">{user.companyOwnerName} </div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Shop Name
+                    </div>
+                    :<div className="w-50 ps-2">{user.companyName}</div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Email Address
+                    </div>
+                    :<div className="w-50 ps-2">{user.email}</div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Mobile Number
+                    </div>
+                    :
+                    <div className="w-50 ps-2">{user.companyContactNumber}</div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      District
+                    </div>
+                    :<div className="w-50 ps-2">{user.district}</div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Address
+                    </div>
+                    :<div className="w-50 ps-2">{user.companyAddress}</div>
+                  </div>
+                  <div className="w-100 d-flex mb-2 justify-content-center">
+                    <div
+                      className="md-w-25 sm-w-50 xs-w-50"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Business Info
+                    </div>
+                    :<div className="w-50 ps-2">{user.businessInfo}</div>
+                  </div>
+                  <div className="d-flex mt-5 justify-content-center">
+                    <button
+                      className="btn btn-secondary w-25"
+                      onClick={() => setEdit(true)}
+                    >
+                      Edit
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,12 +223,14 @@ function CompanyProfile() {
                     src={URL.createObjectURL(image)}
                     alt="upload image"
                     className="w-75 d-flex m-auto rounded-circle align-items-center justify-content-center"
+                    style={{ border: "5px solid blue" }}
                   />
                 ) : imagepath ? (
                   <img
                     src={imagepath}
                     alt=" image"
                     className="w-75 mb-3 rounded-circle align-items-start d-flex "
+                    style={{ border: "5px solid blue" }}
                   />
                 ) : (
                   <FaCircleUser className="w-64 h-64 rounded-circle bg-white " />
