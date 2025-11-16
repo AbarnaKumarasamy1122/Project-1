@@ -73,20 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $duplicatepin = $pin;
 
             if ($duplicatepin) {
+                require_once '../../config/email_config.php';
+                $emailConfig = EmailConfig::validateConfig();
+                
                 $mail = new PHPMailer(true);
         
                 try {
                     //Server settings
                     $mail->isSMTP();                                            // Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
+                    $mail->Host       = $emailConfig['smtp_host'];              // Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                    $mail->Username   = 'nknkrisna@gmail.com';                 // SMTP username
-                    $mail->Password   = 'wqzt qnlr rfha oolb';                  // SMTP password
+                    $mail->Username   = $emailConfig['smtp_username'];          // SMTP username
+                    $mail->Password   = $emailConfig['smtp_password'];          // SMTP password
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-                    $mail->Port       = 587;                                    // TCP port to connect to
+                    $mail->Port       = $emailConfig['smtp_port'];              // TCP port to connect to
         
                     //Recipients
-                    $mail->setFrom('nknkrisna@gmail.com', 'Admin of Elitez');
+                    $mail->setFrom($emailConfig['from_email'], $emailConfig['from_name']);
                     $mail->addAddress($email, $fname);
         
                     // Content
